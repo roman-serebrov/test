@@ -6,10 +6,7 @@ class Api {
     get_api_path(user, template) {
         let result = ''
         result = template.replace(/%(\w+)%/g, (match, key) => {
-            if (key === 'name') {
-                user[key] = user[key].replace(' ', `%${user.id}`)
-            }
-            return user[key]
+            return encodeURI(user[key])
         })
         return result
     }
@@ -36,3 +33,4 @@ let api_paths = api_path_templates.map((api_path_template) => {
 })
 
 console.log(JSON.stringify(api_paths));
+
